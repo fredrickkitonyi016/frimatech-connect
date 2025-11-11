@@ -8,6 +8,10 @@ import Footer from "@/components/Footer";
 import heroSecurity from "@/assets/hero-security.jpg";
 import heroRepair from "@/assets/hero-repair.jpg";
 import heroShop from "@/assets/hero-shop.jpg";
+import heroNetwork from "@/assets/hero-network.jpg";
+import heroCrypto from "@/assets/hero-crypto.jpg";
+import heroCustomer from "@/assets/hero-customer.jpg";
+import heroCybersecurity from "@/assets/hero-cybersecurity.jpg";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -20,16 +24,40 @@ const Home = () => {
       description: "Professional CCTV installation and monitoring systems for complete peace of mind"
     },
     {
+      image: heroNetwork,
+      title: "Seamless Network Solutions",
+      subtitle: "Stay Connected.",
+      description: "Enterprise-grade WiFi installation and structured cabling for homes and offices"
+    },
+    {
       image: heroRepair,
       title: "Precision Repairs",
       subtitle: "Fast & Reliable.",
       description: "Expert repairs for all your devices with warranty-backed service"
     },
     {
+      image: heroCybersecurity,
+      title: "Advanced Cybersecurity",
+      subtitle: "Digital Protection 24/7.",
+      description: "Comprehensive security monitoring and threat detection for your business"
+    },
+    {
+      image: heroCrypto,
+      title: "Cryptocurrency Services",
+      subtitle: "Your Gateway to Digital Assets.",
+      description: "Secure crypto trading and blockchain technology consultation"
+    },
+    {
       image: heroShop,
       title: "Shop Tech & Services Online",
       subtitle: "Delivered to You.",
       description: "Browse our complete range of products and services from the comfort of your home"
+    },
+    {
+      image: heroCustomer,
+      title: "Customer Satisfaction Guaranteed",
+      subtitle: "Your Trust, Our Priority.",
+      description: "Exceptional service with 90-day warranty and 24-hour response guarantee"
     }
   ];
 
