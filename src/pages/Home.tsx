@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Wifi, Camera, Wrench, Bitcoin, ShoppingBag, CheckCircle, Phone, ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import VideoTestimonials from "@/components/VideoTestimonials";
 import heroSecurity from "@/assets/hero-security.jpg";
 import heroRepair from "@/assets/hero-repair.jpg";
 import heroShop from "@/assets/hero-shop.jpg";
@@ -315,6 +316,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Video Testimonials */}
+      <VideoTestimonials />
 
       {/* CTA Section */}
       <section className="py-16 md:py-24">
