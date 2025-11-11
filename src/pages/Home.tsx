@@ -1,11 +1,53 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, Wifi, Camera, Wrench, Bitcoin, ShoppingBag, CheckCircle, Phone } from "lucide-react";
+import { Shield, Wifi, Camera, Wrench, Bitcoin, ShoppingBag, CheckCircle, Phone, ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import heroSecurity from "@/assets/hero-security.jpg";
+import heroRepair from "@/assets/hero-repair.jpg";
+import heroShop from "@/assets/hero-shop.jpg";
 
 const Home = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const heroSlides = [
+    {
+      image: heroSecurity,
+      title: "Expert Security Solutions",
+      subtitle: "Protect What Matters.",
+      description: "Professional CCTV installation and monitoring systems for complete peace of mind"
+    },
+    {
+      image: heroRepair,
+      title: "Precision Repairs",
+      subtitle: "Fast & Reliable.",
+      description: "Expert repairs for all your devices with warranty-backed service"
+    },
+    {
+      image: heroShop,
+      title: "Shop Tech & Services Online",
+      subtitle: "Delivered to You.",
+      description: "Browse our complete range of products and services from the comfort of your home"
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
   const services = [
     {
       icon: Shield,
@@ -56,50 +98,150 @@ const Home = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-tech-blue to-tech-cyan text-primary-foreground">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
-        <div className="container mx-auto px-4 py-20 md:py-32 relative">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Connecting Innovation.<br />
-              Delivering Solutions.
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-95">
-              Your One-Stop Tech Partner in Kenya
-            </p>
-            <p className="text-lg mb-8 opacity-90 max-w-2xl">
-              From cybersecurity and network installation to device repair and tech retail, 
-              Frimat Technologies brings professional technology solutions to homes and businesses across Nairobi.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/book-service">
-                <Button size="lg" variant="default" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                  Get Free Quote
-                </Button>
-              </Link>
-              <Link to="/shop">
-                <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                  Browse Tech Shop
-                </Button>
-              </Link>
+      {/* Hero Carousel Section */}
+      <section className="relative overflow-hidden bg-foreground">
+        <div className="relative h-[600px] md:h-[700px]">
+          {/* Carousel Slides */}
+          {heroSlides.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {/* Background Image */}
+              <div className="absolute inset-0">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/70 to-foreground/40"></div>
+              </div>
+
+              {/* Content */}
+              <div className="relative container mx-auto px-4 h-full flex items-center">
+                <div className="max-w-2xl text-background animate-fade-in">
+                  <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                    {slide.title}
+                  </h1>
+                  <p className="text-2xl md:text-3xl font-semibold mb-6 text-accent">
+                    {slide.subtitle}
+                  </p>
+                  <p className="text-lg md:text-xl mb-8 opacity-90">
+                    {slide.description}
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Link to="/book-service">
+                      <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                        Get Free Quote
+                      </Button>
+                    </Link>
+                    <Link to="/shop">
+                      <Button size="lg" variant="outline" className="border-background text-background hover:bg-background hover:text-foreground">
+                        Browse Shop
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
+          ))}
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-background/20 hover:bg-background/40 backdrop-blur-sm rounded-full transition-all z-10"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="h-6 w-6 text-background" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-background/20 hover:bg-background/40 backdrop-blur-sm rounded-full transition-all z-10"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="h-6 w-6 text-background" />
+          </button>
+
+          {/* Slide Indicators */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-10">
+            {heroSlides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-3 h-3 rounded-full transition-all ${
+                  index === currentSlide
+                    ? "bg-accent w-8"
+                    : "bg-background/50 hover:bg-background/70"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-16 md:py-24">
+      {/* Brief Introduction */}
+      <section className="py-12 bg-card border-b border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-lg md:text-xl text-foreground leading-relaxed">
+              <span className="font-semibold text-primary">Frimat Technologies</span>, based in Nairobi, 
+              is your premier partner for integrated technology solutions. From cyber services and WiFi 
+              installation to device repair and retail, we connect you to the future.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Service Icons */}
+      <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Comprehensive Tech Solutions
+              Our Services
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Professional services tailored to meet all your technology needs
+              Click to explore our comprehensive technology solutions
             </p>
           </div>
           
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 max-w-6xl mx-auto">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <Link
+                  key={index}
+                  to="/services"
+                  className="group"
+                >
+                  <Card className="border-border hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <CardContent className="p-6 text-center">
+                      <div className="inline-flex p-4 bg-secondary rounded-full mb-4 group-hover:bg-primary transition-colors">
+                        <Icon className={`h-8 w-8 ${service.color} group-hover:text-primary-foreground transition-colors`} />
+                      </div>
+                      <h3 className="font-semibold text-sm mb-1 text-foreground">{service.title}</h3>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link to="/services">
+              <Button variant="default" size="lg">
+                View All Services
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Detailed Services Section */}
+      <section className="py-16 bg-secondary/30">
+        <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => {
               const Icon = service.icon;
@@ -119,14 +261,6 @@ const Home = () => {
                 </Card>
               );
             })}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link to="/services">
-              <Button variant="default" size="lg">
-                View All Services
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
