@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Wifi, Camera, Wrench, Bitcoin, ShoppingBag, Check } from "lucide-react";
+import { Shield, Wifi, Camera, Wrench, Bitcoin, ShoppingBag, Check, Printer } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -90,6 +90,22 @@ const Services = () => {
         "Screen Protectors & Phone Cases"
       ],
       color: "text-accent"
+    },
+    {
+      icon: Printer,
+      title: "Cyber Services - Printing & Scanning",
+      description: "Professional printing and digitization services for all your document needs",
+      features: [
+        "High-Volume Printing (A4, A3, A0, A1)",
+        "Color & Black/White Photo Quality Printing",
+        "Business Cards, Flyers & Brochures",
+        "Professional Lamination & UV Coating",
+        "High-Speed Bulk Document Scanning",
+        "OCR & Digital Conversion Services",
+        "Document Archival & Cloud Integration",
+        "Blueprint & Large Format Scanning"
+      ],
+      color: "text-primary"
     }
   ];
 
