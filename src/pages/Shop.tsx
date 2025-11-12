@@ -6,6 +6,7 @@ import { ShoppingCart, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import heroTechShop from "@/assets/hero-techshop.jpg";
 
 const Shop = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -116,8 +117,16 @@ const Shop = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary via-tech-blue to-tech-cyan text-primary-foreground py-16 md:py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gradient-to-br from-primary via-tech-blue to-tech-cyan text-primary-foreground py-16 md:py-20 overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={heroTechShop}
+            alt="Tech Shop"
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-tech-blue/80 to-tech-cyan/80" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Tech Shop</h1>
             <p className="text-xl opacity-95 mb-6">

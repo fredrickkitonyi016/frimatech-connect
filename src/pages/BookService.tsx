@@ -12,6 +12,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import heroBooking from "@/assets/hero-booking.jpg";
 
 const BookService = () => {
   const [date, setDate] = useState<Date>();
@@ -33,6 +34,15 @@ const BookService = () => {
       
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary via-tech-blue to-tech-cyan text-primary-foreground py-16 md:py-20 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src={heroBooking}
+            alt="Book Service"
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-tech-blue/80 to-tech-cyan/80" />
+        </div>
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-64 h-64 bg-tech-cyan/30 rounded-full blur-3xl animate-pulse" />

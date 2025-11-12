@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedPrinterIcon from "@/components/AnimatedPrinterIcon";
 import ServiceFlipCard from "@/components/ServiceFlipCard";
+import heroServices from "@/assets/hero-services.jpg";
 
 const Services = () => {
   const services = [
@@ -151,8 +152,16 @@ const Services = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary via-tech-blue to-tech-cyan text-primary-foreground py-16 md:py-24">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gradient-to-br from-primary via-tech-blue to-tech-cyan text-primary-foreground py-16 md:py-24 overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={heroServices}
+            alt="Technology Services"
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-tech-blue/80 to-tech-cyan/80" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
             <p className="text-xl opacity-95">
