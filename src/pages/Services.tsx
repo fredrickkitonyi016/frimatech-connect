@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Wifi, Camera, Wrench, Bitcoin, ShoppingBag, Check, Printer } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Shield, Wifi, Camera, Wrench, Bitcoin, ShoppingBag, Printer } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedPrinterIcon from "@/components/AnimatedPrinterIcon";
+import ServiceFlipCard from "@/components/ServiceFlipCard";
 
 const Services = () => {
   const services = [
@@ -20,6 +21,11 @@ const Services = () => {
         "Security Incident Response Team",
         "Compliance Reporting & Audits"
       ],
+      pricing: {
+        from: "KES 15,000",
+        popular: "Security Audits from KES 25,000",
+        note: "Custom enterprise packages available"
+      },
       color: "text-primary"
     },
     {
@@ -34,6 +40,11 @@ const Services = () => {
         "Wireless Site Surveys & Heat Mapping",
         "Internet Service Provider Consultation"
       ],
+      pricing: {
+        from: "KES 8,000",
+        popular: "Home WiFi from KES 12,000",
+        note: "Free site survey included with installation"
+      },
       color: "text-tech-cyan"
     },
     {
@@ -48,6 +59,11 @@ const Services = () => {
         "Access Control Systems (Biometric, Card)",
         "Central Monitoring Station Setup"
       ],
+      pricing: {
+        from: "KES 18,000",
+        popular: "4-Camera System from KES 35,000",
+        note: "Installation & configuration included"
+      },
       color: "text-accent"
     },
     {
@@ -62,6 +78,11 @@ const Services = () => {
         "Motherboard-Level Repairs",
         "Operating System Installation"
       ],
+      pricing: {
+        from: "KES 1,500",
+        popular: "Screen Repairs from KES 3,000",
+        note: "90-day warranty on all repairs"
+      },
       color: "text-primary"
     },
     {
@@ -76,6 +97,11 @@ const Services = () => {
         "Blockchain Technology Consultation",
         "Smart Contract Development Advisory"
       ],
+      pricing: {
+        from: "2% Fee",
+        popular: "No minimum transaction",
+        note: "Competitive rates with instant settlement"
+      },
       color: "text-tech-cyan"
     },
     {
@@ -90,6 +116,11 @@ const Services = () => {
         "Brand New & Refurbished Phones",
         "Screen Protectors & Phone Cases"
       ],
+      pricing: {
+        from: "KES 5,000",
+        popular: "Flexible payment plans available",
+        note: "Visit our shop for current inventory"
+      },
       color: "text-accent"
     },
     {
@@ -106,6 +137,11 @@ const Services = () => {
         "Document Archival & Cloud Integration",
         "Blueprint & Large Format Scanning"
       ],
+      pricing: {
+        from: "KES 5/page",
+        popular: "Color printing from KES 20/page",
+        note: "Bulk discounts available for large orders"
+      },
       color: "text-primary"
     }
   ];
@@ -133,34 +169,22 @@ const Services = () => {
             {services.map((service, index) => {
               const Icon = service.icon;
               const isCyberService = service.title.includes("Cyber Services");
+              const iconElement = isCyberService ? (
+                <AnimatedPrinterIcon className={`h-8 w-8 ${service.color}`} />
+              ) : (
+                <Icon className={`h-8 w-8 ${service.color}`} />
+              );
+
               return (
-                <Card key={index} className="border-border hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex items-start space-x-4">
-                      <div className="p-3 bg-secondary rounded-lg">
-                        {isCyberService ? (
-                          <AnimatedPrinterIcon className={`h-8 w-8 ${service.color}`} />
-                        ) : (
-                          <Icon className={`h-8 w-8 ${service.color}`} />
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <CardTitle className="text-2xl mb-2">{service.title}</CardTitle>
-                        <p className="text-sm text-muted-foreground">{service.description}</p>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start space-x-2">
-                          <Check className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                          <span className="text-sm text-foreground">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                <ServiceFlipCard
+                  key={index}
+                  icon={iconElement}
+                  title={service.title}
+                  description={service.description}
+                  features={service.features}
+                  pricing={service.pricing}
+                  color={service.color}
+                />
               );
             })}
           </div>
