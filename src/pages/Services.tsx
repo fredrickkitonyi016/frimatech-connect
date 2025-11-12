@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Wifi, Camera, Wrench, Bitcoin, ShoppingBag, Check, Printer } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AnimatedPrinterIcon from "@/components/AnimatedPrinterIcon";
 
 const Services = () => {
   const services = [
@@ -131,12 +132,17 @@ const Services = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
+              const isCyberService = service.title.includes("Cyber Services");
               return (
                 <Card key={index} className="border-border hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex items-start space-x-4">
                       <div className="p-3 bg-secondary rounded-lg">
-                        <Icon className={`h-8 w-8 ${service.color}`} />
+                        {isCyberService ? (
+                          <AnimatedPrinterIcon className={`h-8 w-8 ${service.color}`} />
+                        ) : (
+                          <Icon className={`h-8 w-8 ${service.color}`} />
+                        )}
                       </div>
                       <div className="flex-1">
                         <CardTitle className="text-2xl mb-2">{service.title}</CardTitle>

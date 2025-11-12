@@ -129,7 +129,13 @@ const Home = () => {
       
       {/* Hero Carousel Section */}
       <section className="relative overflow-hidden bg-foreground">
-        <div className="relative h-[600px] md:h-[700px]">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-10 right-10 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 left-10 w-96 h-96 bg-tech-cyan/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+          <div className="absolute top-1/3 left-1/3 w-80 h-80 bg-tech-blue/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "0.5s" }} />
+        </div>
+        <div className="relative h-[600px] md:h-[700px] z-10">
           {/* Carousel Slides */}
           {heroSlides.map((slide, index) => (
             <div
