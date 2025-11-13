@@ -18,9 +18,9 @@ const Contact = () => {
           <img
             src={heroContact}
             alt="Contact Us"
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover opacity-50"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-tech-blue/80 to-tech-cyan/80" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-tech-blue/60 to-tech-cyan/60" />
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
