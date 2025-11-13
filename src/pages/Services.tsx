@@ -7,6 +7,13 @@ import Footer from "@/components/Footer";
 import AnimatedPrinterIcon from "@/components/AnimatedPrinterIcon";
 import ServiceFlipCard from "@/components/ServiceFlipCard";
 import heroServices from "@/assets/hero-services.jpg";
+import heroCybersecurity from "@/assets/hero-cybersecurity.jpg";
+import heroNetwork from "@/assets/hero-network.jpg";
+import heroSecurity from "@/assets/hero-security.jpg";
+import heroRepair from "@/assets/hero-repair.jpg";
+import heroCrypto from "@/assets/hero-crypto.jpg";
+import heroShop from "@/assets/hero-shop.jpg";
+import heroCustomer from "@/assets/hero-customer.jpg";
 
 const Services = () => {
   const services = [
@@ -27,7 +34,8 @@ const Services = () => {
         popular: "Security Audits from KES 25,000",
         note: "Custom enterprise packages available"
       },
-      color: "text-primary"
+      color: "text-primary",
+      image: heroCybersecurity
     },
     {
       icon: Wifi,
@@ -46,7 +54,8 @@ const Services = () => {
         popular: "Home WiFi from KES 12,000",
         note: "Free site survey included with installation"
       },
-      color: "text-tech-cyan"
+      color: "text-tech-cyan",
+      image: heroNetwork
     },
     {
       icon: Camera,
@@ -65,7 +74,8 @@ const Services = () => {
         popular: "4-Camera System from KES 35,000",
         note: "Installation & configuration included"
       },
-      color: "text-accent"
+      color: "text-accent",
+      image: heroSecurity
     },
     {
       icon: Wrench,
@@ -84,7 +94,8 @@ const Services = () => {
         popular: "Screen Repairs from KES 3,000",
         note: "90-day warranty on all repairs"
       },
-      color: "text-primary"
+      color: "text-primary",
+      image: heroRepair
     },
     {
       icon: Bitcoin,
@@ -103,7 +114,8 @@ const Services = () => {
         popular: "No minimum transaction",
         note: "Competitive rates with instant settlement"
       },
-      color: "text-tech-cyan"
+      color: "text-tech-cyan",
+      image: heroCrypto
     },
     {
       icon: ShoppingBag,
@@ -122,7 +134,8 @@ const Services = () => {
         popular: "Flexible payment plans available",
         note: "Visit our shop for current inventory"
       },
-      color: "text-accent"
+      color: "text-accent",
+      image: heroShop
     },
     {
       icon: Printer,
@@ -143,7 +156,8 @@ const Services = () => {
         popular: "Color printing from KES 20/page",
         note: "Bulk discounts available for large orders"
       },
-      color: "text-primary"
+      color: "text-primary",
+      image: heroCustomer
     }
   ];
 
@@ -193,6 +207,7 @@ const Services = () => {
                   features={service.features}
                   pricing={service.pricing}
                   color={service.color}
+                  image={service.image}
                 />
               );
             })}
