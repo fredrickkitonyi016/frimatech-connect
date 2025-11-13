@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ImageLightbox } from "@/components/ImageLightbox";
 import heroGallery from "@/assets/hero-gallery.jpg";
 
 const Gallery = () => {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const projects = [
     {
       id: 1,
@@ -106,14 +110,23 @@ const Gallery = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
+            {projects.map((project, index) => (
               <Card key={project.id} className="border-border overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-video bg-secondary relative">
+                <div 
+                  className="aspect-video bg-secondary relative cursor-pointer group"
+                  onClick={() => {
+                    setSelectedImageIndex(index);
+                    setLightboxOpen(true);
+                  }}
+                >
                   <img 
                     src={project.image} 
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="text-primary-foreground font-semibold text-lg">View Image</span>
+                  </div>
                   <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground">
                     {project.category}
                   </Badge>
@@ -199,6 +212,14 @@ const Gallery = () => {
       </section>
 
       <Footer />
+      
+      {/* Image Lightbox */}
+      <ImageLightbox
+        images={projects.map(p => ({ url: p.image, alt: p.title }))}
+        initialIndex={selectedImageIndex}
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+      />
     </div>
   );
 };
