@@ -3,6 +3,8 @@ import { Target, Eye, Award, Users } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroAbout from "@/assets/hero-about.jpg";
+import teamStory from "@/assets/team-story.jpg";
+import ceoPortrait from "@/assets/ceo-portrait.jpg";
 
 const About = () => {
   const values = [
@@ -56,7 +58,7 @@ const About = () => {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="order-2 lg:order-1">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Our Story</h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
@@ -76,6 +78,25 @@ const About = () => {
                   cryptocurrency services.
                 </p>
               </div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <div className="relative rounded-lg overflow-hidden shadow-xl">
+                <img
+                  src={teamStory}
+                  alt="Frimat Technologies Team"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="relative rounded-lg overflow-hidden shadow-xl">
+              <img
+                src={ceoPortrait}
+                alt="Fredrick Kitonyi Kiio - CEO"
+                className="w-full h-full object-cover"
+              />
             </div>
             <Card className="border-border">
               <CardContent className="p-8">

@@ -15,6 +15,7 @@ interface ServiceFlipCardProps {
     note?: string;
   };
   color: string;
+  image?: string;
 }
 
 const ServiceFlipCard = ({ 
@@ -23,14 +24,25 @@ const ServiceFlipCard = ({
   description, 
   features, 
   pricing,
-  color 
+  color,
+  image
 }: ServiceFlipCardProps) => {
   return (
     <div className="flip-card-container h-full perspective-1000">
       <div className="flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d hover:rotate-y-180">
         {/* Front Face */}
         <div className="flip-card-face flip-card-front absolute inset-0 backface-hidden">
-          <Card className="border-border h-full shadow-lg">
+          <Card className="border-border h-full shadow-lg overflow-hidden">
+            {image && (
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={image}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+              </div>
+            )}
             <CardHeader>
               <div className="flex items-start space-x-4">
                 <div className="p-3 bg-secondary rounded-lg">
