@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, Wifi, Camera, Wrench, Bitcoin, ShoppingBag, CheckCircle, Phone, ChevronLeft, ChevronRight } from "lucide-react";
+import { Shield, Wifi, Camera, Wrench, Bitcoin, ShoppingBag, CheckCircle, Phone, ChevronLeft, ChevronRight, Users, Award, Clock, TrendingUp, ArrowRight, Package, HelpCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import VideoTestimonials from "@/components/VideoTestimonials";
@@ -123,6 +123,86 @@ const Home = () => {
     "Transparent pricing, no hidden fees"
   ];
 
+  const stats = [
+    { icon: Users, value: "2,500+", label: "Happy Clients" },
+    { icon: Award, value: "15+", label: "Years Experience" },
+    { icon: CheckCircle, value: "10,000+", label: "Projects Completed" },
+    { icon: Clock, value: "24/7", label: "Support Available" }
+  ];
+
+  const partners = [
+    "Safaricom", "Airtel", "Microsoft", "Cisco", "HP", "Dell", "Samsung", "Apple"
+  ];
+
+  const process = [
+    {
+      step: "1",
+      title: "Contact Us",
+      description: "Reach out via phone, email, or our website to discuss your needs"
+    },
+    {
+      step: "2",
+      title: "Free Consultation",
+      description: "We assess your requirements and provide expert recommendations"
+    },
+    {
+      step: "3",
+      title: "Get Quote",
+      description: "Receive a detailed, transparent quote with no hidden fees"
+    },
+    {
+      step: "4",
+      title: "Service Delivery",
+      description: "Our certified technicians deliver quality service on time"
+    }
+  ];
+
+  const featuredProducts = [
+    {
+      name: "4K CCTV Camera System",
+      price: "KSh 45,000",
+      description: "Complete 4-camera setup with night vision and remote viewing"
+    },
+    {
+      name: "Enterprise WiFi Router",
+      price: "KSh 12,500",
+      description: "High-speed dual-band router for offices up to 5,000 sq ft"
+    },
+    {
+      name: "Laptop Repair Service",
+      price: "From KSh 2,000",
+      description: "Expert diagnosis and repair with 90-day warranty"
+    },
+    {
+      name: "Network Cabling Package",
+      price: "KSh 350/point",
+      description: "Professional CAT6 cabling installation for offices"
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "What areas do you service?",
+      answer: "We primarily serve Nairobi and surrounding areas, including Kiambu, Machakos, and Kajiado. For projects outside these areas, please contact us for availability."
+    },
+    {
+      question: "Do you offer warranties on repairs?",
+      answer: "Yes, all our repair services come with a 90-day warranty covering both parts and labor. This ensures your peace of mind and our commitment to quality."
+    },
+    {
+      question: "How quickly can you respond to service requests?",
+      answer: "For emergency services, we offer same-day response within Nairobi. Standard service requests are typically scheduled within 24-48 hours."
+    },
+    {
+      question: "Do you provide maintenance contracts?",
+      answer: "Yes, we offer flexible maintenance contracts for businesses, including monthly and annual plans covering network infrastructure, CCTV systems, and IT equipment."
+    },
+    {
+      question: "What payment methods do you accept?",
+      answer: "We accept M-Pesa, bank transfers, cash, and card payments. For larger projects, we offer flexible payment terms."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -230,6 +310,26 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Stats Section */}
+      <section className="py-16 bg-gradient-to-br from-primary to-tech-cyan">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => {
+              const Icon = stat.icon;
+              return (
+                <div key={index} className="text-center text-primary-foreground">
+                  <div className="inline-flex p-4 bg-white/10 rounded-full mb-4">
+                    <Icon className="h-8 w-8" />
+                  </div>
+                  <div className="text-4xl md:text-5xl font-bold mb-2">{stat.value}</div>
+                  <div className="text-sm md:text-base opacity-90">{stat.label}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Quick Service Icons */}
       <section className="py-16 md:py-20 bg-background">
         <div className="container mx-auto px-4">
@@ -323,8 +423,143 @@ const Home = () => {
         </div>
       </section>
 
+      {/* How It Works */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              How It Works
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Our simple 4-step process ensures you get the best service experience
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            {process.map((item, index) => (
+              <div key={index} className="relative text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary text-primary-foreground rounded-full text-2xl font-bold mb-4">
+                  {item.step}
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground">{item.description}</p>
+                {index < process.length - 1 && (
+                  <ArrowRight className="hidden lg:block absolute top-8 -right-4 h-6 w-6 text-primary" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section className="py-16 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Featured Products & Services
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Popular solutions trusted by our clients
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {featuredProducts.map((product, index) => (
+              <Card key={index} className="border-border hover:shadow-lg transition-all hover:scale-105">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mb-4">
+                    <Package className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2 text-foreground">{product.name}</h3>
+                  <p className="text-2xl font-bold text-primary mb-2">{product.price}</p>
+                  <p className="text-sm text-muted-foreground mb-4">{product.description}</p>
+                  <Link to="/shop">
+                    <Button variant="outline" size="sm" className="w-full">
+                      Learn More
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link to="/shop">
+              <Button size="lg">
+                Browse All Products
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Partners Section */}
+      <section className="py-16 bg-card">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Trusted Partners
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              We work with industry-leading brands to deliver quality solutions
+            </p>
+          </div>
+          
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 max-w-5xl mx-auto">
+            {partners.map((partner, index) => (
+              <div key={index} className="text-muted-foreground hover:text-foreground transition-colors">
+                <div className="text-xl md:text-2xl font-semibold opacity-60 hover:opacity-100">
+                  {partner}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Video Testimonials */}
       <VideoTestimonials />
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Got questions? We have answers
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto space-y-4">
+            {faqs.map((faq, index) => (
+              <Card key={index} className="border-border">
+                <CardContent className="p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <HelpCircle className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg mb-2 text-foreground">{faq.question}</h3>
+                      <p className="text-muted-foreground">{faq.answer}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link to="/contact">
+              <Button variant="outline" size="lg">
+                Have More Questions? Contact Us
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="py-16 md:py-24">
