@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CartDrawer } from "./CartDrawer";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,19 +60,23 @@ const Navbar = () => {
 
           {/* Contact Info - Desktop */}
           <div className="hidden xl:flex items-center space-x-4 text-sm">
+            <CartDrawer />
             <a href="tel:0112277289" className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors">
               <Phone className="h-4 w-4" />
               <span>0112277289</span>
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-md text-foreground hover:bg-secondary"
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Mobile Menu Button + Cart */}
+          <div className="lg:hidden flex items-center gap-2">
+            <CartDrawer />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-md text-foreground hover:bg-secondary"
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
