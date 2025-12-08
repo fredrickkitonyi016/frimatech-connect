@@ -117,56 +117,45 @@ const ServicesMegaMenu = () => {
   ];
 
   return (
-    <div className="absolute left-0 top-full w-full bg-background/95 backdrop-blur-lg border-t border-border shadow-strong animate-slide-down">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="absolute left-1/2 -translate-x-1/2 top-full w-[800px] max-w-[95vw] bg-card border border-border rounded-xl shadow-strong animate-fade-in z-50">
+      <div className="p-6">
+        <div className="grid grid-cols-2 gap-6">
           {/* Core Services Column */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4 flex items-center gap-2">
-              <Server className="h-4 w-4" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-primary mb-3 flex items-center gap-2 pb-2 border-b border-border">
+              <Server className="h-3.5 w-3.5" />
               Core IT Services
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-1">
               {coreServices.map((service, idx) => (
                 <div 
                   key={idx} 
-                  className="group relative p-4 rounded-lg hover:bg-secondary/50 transition-all duration-300 cursor-pointer border border-transparent hover:border-primary/20"
-                  style={{ animationDelay: `${idx * 50}ms` }}
+                  className="group p-2.5 rounded-lg hover:bg-secondary/80 transition-all duration-200 cursor-pointer"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-tech-cyan text-primary-foreground group-hover:scale-110 transition-transform">
-                      <service.icon className="h-5 w-5" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-1.5 rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                      <service.icon className="h-4 w-4" />
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
                           {service.title}
                         </h4>
                         {service.popular && (
-                          <span className="px-2 py-0.5 text-xs font-medium bg-accent/20 text-accent rounded-full">
-                            Popular
+                          <span className="px-1.5 py-0.5 text-[10px] font-bold bg-accent text-accent-foreground rounded">
+                            HOT
                           </span>
                         )}
                       </div>
-                      {service.description && (
-                        <p className="text-sm text-muted-foreground mb-2">{service.description}</p>
-                      )}
-                      {service.subItems && (
-                        <ul className="space-y-1.5 mt-2">
-                          {service.subItems.map((item, subIdx) => (
-                            <li key={subIdx} className="flex items-center justify-between text-sm text-muted-foreground hover:text-foreground transition-colors">
-                              <span className="flex items-center gap-1">
-                                <ChevronRight className="h-3 w-3 text-primary" />
-                                {item.name}
-                              </span>
-                              {item.price && (
-                                <span className="text-xs font-medium text-primary">{item.price}</span>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
+                      <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
+                        {service.subItems?.slice(0, 3).map((item, subIdx) => (
+                          <span key={subIdx} className="text-xs text-muted-foreground hover:text-primary transition-colors">
+                            {item.name}
+                          </span>
+                        ))}
+                      </div>
                     </div>
+                    <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </div>
               ))}
@@ -175,48 +164,40 @@ const ServicesMegaMenu = () => {
 
           {/* Cyber Services Column */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4 flex items-center gap-2">
-              <Globe className="h-4 w-4" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-accent mb-3 flex items-center gap-2 pb-2 border-b border-border">
+              <Globe className="h-3.5 w-3.5" />
               Cyber Café Services
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-1">
               {cyberServices.map((service, idx) => (
                 <div 
                   key={idx} 
-                  className="group relative p-4 rounded-lg hover:bg-secondary/50 transition-all duration-300 cursor-pointer border border-transparent hover:border-primary/20"
-                  style={{ animationDelay: `${idx * 50}ms` }}
+                  className="group p-2.5 rounded-lg hover:bg-secondary/80 transition-all duration-200 cursor-pointer"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-lg bg-gradient-to-br from-accent to-tech-orange text-accent-foreground group-hover:scale-110 transition-transform">
-                      <service.icon className="h-5 w-5" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-1.5 rounded-md bg-accent/10 text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+                      <service.icon className="h-4 w-4" />
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-semibold text-foreground group-hover:text-accent transition-colors">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors">
                           {service.title}
                         </h4>
                         {service.popular && (
-                          <span className="px-2 py-0.5 text-xs font-medium bg-primary/20 text-primary rounded-full">
-                            Popular
+                          <span className="px-1.5 py-0.5 text-[10px] font-bold bg-primary text-primary-foreground rounded">
+                            HOT
                           </span>
                         )}
                       </div>
-                      {service.subItems && (
-                        <ul className="space-y-1.5 mt-2">
-                          {service.subItems.map((item, subIdx) => (
-                            <li key={subIdx} className="flex items-center justify-between text-sm text-muted-foreground hover:text-foreground transition-colors">
-                              <span className="flex items-center gap-1">
-                                <ChevronRight className="h-3 w-3 text-accent" />
-                                {item.name}
-                              </span>
-                              {item.price && (
-                                <span className="text-xs font-medium text-accent">{item.price}</span>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
+                      <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
+                        {service.subItems?.slice(0, 3).map((item, subIdx) => (
+                          <span key={subIdx} className="text-xs text-muted-foreground hover:text-accent transition-colors">
+                            {item.name}
+                          </span>
+                        ))}
+                      </div>
                     </div>
+                    <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </div>
               ))}
@@ -225,19 +206,24 @@ const ServicesMegaMenu = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-8 pt-6 border-t border-border flex items-center justify-center gap-4">
-          <a 
-            href="/services" 
-            className="px-6 py-2 bg-gradient-to-r from-primary to-tech-cyan text-primary-foreground rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all"
-          >
-            View All Services
-          </a>
-          <a 
-            href="/book-service" 
-            className="px-6 py-2 border border-accent text-accent rounded-lg font-medium hover:bg-accent hover:text-accent-foreground transition-all"
-          >
-            Book Now
-          </a>
+        <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
+          <p className="text-xs text-muted-foreground">
+            Professional IT & Cyber services in Nairobi
+          </p>
+          <div className="flex gap-2">
+            <a 
+              href="/services" 
+              className="px-4 py-1.5 text-xs font-semibold bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+            >
+              All Services
+            </a>
+            <a 
+              href="/book-service" 
+              className="px-4 py-1.5 text-xs font-semibold border border-accent text-accent rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              Book Now
+            </a>
+          </div>
         </div>
       </div>
     </div>
