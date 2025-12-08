@@ -1,20 +1,18 @@
 import { 
   Wrench, 
-  HardDrive, 
   Wifi, 
   Globe, 
   FileText, 
   Printer, 
   Coffee,
   Laptop,
-  Monitor,
   Network,
   Shield,
   Server,
-  Database,
-  Cloud,
-  Lock,
-  ChevronRight
+  ChevronRight,
+  Zap,
+  Camera,
+  FileCheck
 } from "lucide-react";
 
 interface ServiceItem {
@@ -23,6 +21,13 @@ interface ServiceItem {
   description?: string;
   popular?: boolean;
   subItems?: { name: string; price?: string }[];
+}
+
+interface QuickLink {
+  title: string;
+  icon: React.ElementType;
+  href: string;
+  color: "primary" | "accent";
 }
 
 const ServicesMegaMenu = () => {
@@ -116,9 +121,42 @@ const ServicesMegaMenu = () => {
     },
   ];
 
+  const featuredLinks: QuickLink[] = [
+    { title: "Laptop Repair", icon: Laptop, href: "/book-service", color: "primary" },
+    { title: "WiFi Setup", icon: Wifi, href: "/book-service", color: "primary" },
+    { title: "CCTV Install", icon: Camera, href: "/book-service", color: "primary" },
+    { title: "KRA PIN", icon: FileCheck, href: "/book-service", color: "accent" },
+    { title: "Printing", icon: Printer, href: "/book-service", color: "accent" },
+  ];
+
   return (
     <div className="absolute left-1/2 -translate-x-1/2 top-full w-[800px] max-w-[95vw] bg-card border border-border rounded-xl shadow-strong animate-fade-in z-50">
-      <div className="p-6">
+      <div className="p-5">
+        {/* Featured Quick Links */}
+        <div className="flex items-center gap-2 mb-4 pb-4 border-b border-border">
+          <Zap className="h-4 w-4 text-accent" />
+          <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mr-2">Quick Access:</span>
+          <div className="flex flex-wrap gap-2">
+            {featuredLinks.map((link, idx) => {
+              const IconComponent = link.icon;
+              return (
+                <a
+                  key={idx}
+                  href={link.href}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
+                    link.color === "primary"
+                      ? "bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground"
+                      : "bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground"
+                  }`}
+                >
+                  <IconComponent className="h-3 w-3" />
+                  {link.title}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 gap-6">
           {/* Core Services Column */}
           <div>
