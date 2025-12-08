@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Mail, User, ShoppingCart, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, Mail, User, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CartDrawer } from "./CartDrawer";
 import ServicesMegaMenu from "./ServicesMegaMenu";
+import { ThemeToggle } from "./ThemeToggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,6 +92,9 @@ const Navbar = () => {
           <div className="hidden xl:flex items-center space-x-4">
             <CartDrawer />
             
+            {/* Theme Toggle */}
+            <ThemeToggle />
+            
             {/* Account Icon */}
             <button className="p-2 rounded-full hover:bg-secondary transition-all duration-300 group relative">
               <User className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -110,6 +114,7 @@ const Navbar = () => {
           {/* Mobile Menu Button + Icons */}
           <div className="lg:hidden flex items-center gap-2">
             <CartDrawer />
+            <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-md text-foreground hover:bg-secondary transition-all duration-300"
