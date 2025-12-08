@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { 
   Wrench, 
   Wifi, 
@@ -18,6 +19,7 @@ import {
 interface ServiceItem {
   title: string;
   icon: React.ElementType;
+  slug: string;
   description?: string;
   popular?: boolean;
   subItems?: { name: string; price?: string }[];
@@ -26,7 +28,7 @@ interface ServiceItem {
 interface QuickLink {
   title: string;
   icon: React.ElementType;
-  href: string;
+  service: string;
   color: "primary" | "accent";
 }
 
@@ -35,6 +37,7 @@ const ServicesMegaMenu = () => {
     {
       title: "IT Support",
       icon: Laptop,
+      slug: "it-support",
       description: "24/7 Technical Support",
       popular: true,
       subItems: [
@@ -46,6 +49,7 @@ const ServicesMegaMenu = () => {
     {
       title: "Hardware Repair",
       icon: Wrench,
+      slug: "hardware-repair",
       description: "Expert Repairs",
       subItems: [
         { name: "Laptop Repair", price: "From KSh 1,500" },
@@ -57,6 +61,7 @@ const ServicesMegaMenu = () => {
     {
       title: "Networking",
       icon: Network,
+      slug: "networking",
       description: "Professional Setup",
       popular: true,
       subItems: [
@@ -68,6 +73,7 @@ const ServicesMegaMenu = () => {
     {
       title: "Web & Digital",
       icon: Globe,
+      slug: "web-digital",
       description: "Online Solutions",
       subItems: [
         { name: "Website Development" },
@@ -81,6 +87,7 @@ const ServicesMegaMenu = () => {
     {
       title: "Government e-Services",
       icon: Shield,
+      slug: "government-services",
       subItems: [
         { name: "KRA PIN Registration" },
         { name: "NTSA Services" },
@@ -91,6 +98,7 @@ const ServicesMegaMenu = () => {
     {
       title: "Online Applications",
       icon: FileText,
+      slug: "online-applications",
       subItems: [
         { name: "Job Applications" },
         { name: "University Applications" },
@@ -101,6 +109,7 @@ const ServicesMegaMenu = () => {
     {
       title: "Printing & Documentation",
       icon: Printer,
+      slug: "printing-documentation",
       popular: true,
       subItems: [
         { name: "Document Printing", price: "KSh 5/page" },
@@ -112,6 +121,7 @@ const ServicesMegaMenu = () => {
     {
       title: "General Cyber Café",
       icon: Coffee,
+      slug: "cyber-cafe",
       subItems: [
         { name: "Internet Access", price: "KSh 20/hr" },
         { name: "Computer Use", price: "KSh 50/hr" },
@@ -122,11 +132,11 @@ const ServicesMegaMenu = () => {
   ];
 
   const featuredLinks: QuickLink[] = [
-    { title: "Laptop Repair", icon: Laptop, href: "/book-service", color: "primary" },
-    { title: "WiFi Setup", icon: Wifi, href: "/book-service", color: "primary" },
-    { title: "CCTV Install", icon: Camera, href: "/book-service", color: "primary" },
-    { title: "KRA PIN", icon: FileCheck, href: "/book-service", color: "accent" },
-    { title: "Printing", icon: Printer, href: "/book-service", color: "accent" },
+    { title: "Laptop Repair", icon: Laptop, service: "Laptop Repair", color: "primary" },
+    { title: "WiFi Setup", icon: Wifi, service: "WiFi Installation", color: "primary" },
+    { title: "CCTV Install", icon: Camera, service: "CCTV Installation", color: "primary" },
+    { title: "KRA PIN", icon: FileCheck, service: "KRA PIN Registration", color: "accent" },
+    { title: "Printing", icon: Printer, service: "Document Printing", color: "accent" },
   ];
 
   return (
@@ -140,9 +150,9 @@ const ServicesMegaMenu = () => {
             {featuredLinks.map((link, idx) => {
               const IconComponent = link.icon;
               return (
-                <a
+                <Link
                   key={idx}
-                  href={link.href}
+                  to={`/book-service?service=${encodeURIComponent(link.service)}`}
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
                     link.color === "primary"
                       ? "bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground"
@@ -151,7 +161,7 @@ const ServicesMegaMenu = () => {
                 >
                   <IconComponent className="h-3 w-3" />
                   {link.title}
-                </a>
+                </Link>
               );
             })}
           </div>
@@ -165,38 +175,42 @@ const ServicesMegaMenu = () => {
               Core IT Services
             </h3>
             <div className="space-y-1">
-              {coreServices.map((service, idx) => (
-                <div 
-                  key={idx} 
-                  className="group p-2.5 rounded-lg hover:bg-secondary/80 transition-all duration-200 cursor-pointer"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-1.5 rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                      <service.icon className="h-4 w-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h4 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
-                          {service.title}
-                        </h4>
-                        {service.popular && (
-                          <span className="px-1.5 py-0.5 text-[10px] font-bold bg-accent text-accent-foreground rounded">
-                            HOT
-                          </span>
-                        )}
+              {coreServices.map((service, idx) => {
+                const IconComponent = service.icon;
+                return (
+                  <Link 
+                    key={idx}
+                    to={`/book-service?service=${encodeURIComponent(service.title)}`}
+                    className="group block p-2.5 rounded-lg hover:bg-secondary/80 transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <div className="p-1.5 rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                        <IconComponent className="h-4 w-4" />
                       </div>
-                      <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
-                        {service.subItems?.slice(0, 3).map((item, subIdx) => (
-                          <span key={subIdx} className="text-xs text-muted-foreground hover:text-primary transition-colors">
-                            {item.name}
-                          </span>
-                        ))}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <h4 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                            {service.title}
+                          </h4>
+                          {service.popular && (
+                            <span className="px-1.5 py-0.5 text-[10px] font-bold bg-accent text-accent-foreground rounded">
+                              HOT
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
+                          {service.subItems?.slice(0, 3).map((item, subIdx) => (
+                            <span key={subIdx} className="text-xs text-muted-foreground group-hover:text-primary/70 transition-colors">
+                              {item.name}
+                            </span>
+                          ))}
+                        </div>
                       </div>
+                      <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
                     </div>
-                    <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
-                  </div>
-                </div>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -207,38 +221,42 @@ const ServicesMegaMenu = () => {
               Cyber Café Services
             </h3>
             <div className="space-y-1">
-              {cyberServices.map((service, idx) => (
-                <div 
-                  key={idx} 
-                  className="group p-2.5 rounded-lg hover:bg-secondary/80 transition-all duration-200 cursor-pointer"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-1.5 rounded-md bg-accent/10 text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-                      <service.icon className="h-4 w-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h4 className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors">
-                          {service.title}
-                        </h4>
-                        {service.popular && (
-                          <span className="px-1.5 py-0.5 text-[10px] font-bold bg-primary text-primary-foreground rounded">
-                            HOT
-                          </span>
-                        )}
+              {cyberServices.map((service, idx) => {
+                const IconComponent = service.icon;
+                return (
+                  <Link 
+                    key={idx}
+                    to={`/book-service?service=${encodeURIComponent(service.title)}`}
+                    className="group block p-2.5 rounded-lg hover:bg-secondary/80 transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <div className="p-1.5 rounded-md bg-accent/10 text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+                        <IconComponent className="h-4 w-4" />
                       </div>
-                      <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
-                        {service.subItems?.slice(0, 3).map((item, subIdx) => (
-                          <span key={subIdx} className="text-xs text-muted-foreground hover:text-accent transition-colors">
-                            {item.name}
-                          </span>
-                        ))}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <h4 className="text-sm font-semibold text-foreground group-hover:text-accent transition-colors">
+                            {service.title}
+                          </h4>
+                          {service.popular && (
+                            <span className="px-1.5 py-0.5 text-[10px] font-bold bg-primary text-primary-foreground rounded">
+                              HOT
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1">
+                          {service.subItems?.slice(0, 3).map((item, subIdx) => (
+                            <span key={subIdx} className="text-xs text-muted-foreground group-hover:text-accent/70 transition-colors">
+                              {item.name}
+                            </span>
+                          ))}
+                        </div>
                       </div>
+                      <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
                     </div>
-                    <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
-                  </div>
-                </div>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -249,18 +267,18 @@ const ServicesMegaMenu = () => {
             Professional IT & Cyber services in Nairobi
           </p>
           <div className="flex gap-2">
-            <a 
-              href="/services" 
+            <Link 
+              to="/services" 
               className="px-4 py-1.5 text-xs font-semibold bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
             >
               All Services
-            </a>
-            <a 
-              href="/book-service" 
+            </Link>
+            <Link 
+              to="/book-service" 
               className="px-4 py-1.5 text-xs font-semibold border border-accent text-accent rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
             >
               Book Now
-            </a>
+            </Link>
           </div>
         </div>
       </div>

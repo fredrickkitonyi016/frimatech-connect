@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,18 +16,38 @@ import Footer from "@/components/Footer";
 import heroBooking from "@/assets/hero-booking.jpg";
 
 const BookService = () => {
+  const [searchParams] = useSearchParams();
   const [date, setDate] = useState<Date>();
   const [selectedService, setSelectedService] = useState("");
 
   const services = [
+    "IT Support",
+    "Hardware Repair",
+    "Networking",
+    "Web & Digital",
+    "Government e-Services",
+    "Online Applications",
+    "Printing & Documentation",
+    "General Cyber Café",
     "CCTV Installation",
     "WiFi Installation",
-    "Network Setup",
+    "Laptop Repair",
     "Phone Repair",
-    "Computer Repair",
-    "Security Audit",
+    "KRA PIN Registration",
     "Other"
   ];
+
+  // Read service from URL on mount
+  useEffect(() => {
+    const serviceParam = searchParams.get("service");
+    if (serviceParam) {
+      // Try to match with existing services or set as-is
+      const matchedService = services.find(
+        s => s.toLowerCase() === serviceParam.toLowerCase()
+      );
+      setSelectedService(matchedService || serviceParam);
+    }
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-background">
