@@ -13,7 +13,8 @@ import {
   ChevronRight,
   Zap,
   Camera,
-  FileCheck
+  FileCheck,
+  Calculator
 } from "lucide-react";
 
 interface ServiceItem {
@@ -270,6 +271,13 @@ const ServicesMegaMenu = () => {
             Professional IT & Cyber services in Nairobi
           </p>
           <div className="flex gap-2">
+            <Link 
+              to="/quotation" 
+              className="px-4 py-1.5 text-xs font-semibold bg-secondary text-foreground rounded-md hover:bg-secondary/80 transition-colors inline-flex items-center gap-1"
+            >
+              <Calculator className="h-3 w-3" />
+              Get Quote
+            </Link>
             <Link 
               to="/services" 
               className="px-4 py-1.5 text-xs font-semibold bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
