@@ -12,6 +12,7 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import BookService from "./pages/BookService";
 import ProductDetail from "./pages/ProductDetail";
+import QuotationGenerator from "./pages/QuotationGenerator";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/book-service" element={<BookService />} />
+            <Route path="/quotation" element={<QuotationGenerator />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
