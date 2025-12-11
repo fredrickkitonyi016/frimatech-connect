@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -6,8 +7,38 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import heroContact from "@/assets/hero-contact.jpg";
+import { toast } from "sonner";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
+  });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+    if (!formData.message.trim()) newErrors.message = "Message is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateForm()) {
+      toast.success("Message sent successfully! We'll get back to you soon.");
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    }
+  };
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -39,43 +70,69 @@ const Contact = () => {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-bold text-foreground mb-6">Send Us a Message</h2>
-              <Card className="border-border">
+                <Card className="border-border">
                 <CardContent className="p-6">
-                  <form className="space-y-4">
+                  <form className="space-y-4" onSubmit={handleSubmit}>
                     <div>
                       <label className="text-sm font-medium text-foreground mb-1.5 block">
-                        Your Name
+                        Your Name <span className="text-destructive">*</span>
                       </label>
-                      <Input placeholder="John Doe" />
+                      <Input 
+                        placeholder="John Doe" 
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className={errors.name ? "border-destructive" : ""}
+                      />
+                      {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
                     </div>
                     <div>
                       <label className="text-sm font-medium text-foreground mb-1.5 block">
-                        Email Address
+                        Email Address <span className="text-destructive">*</span>
                       </label>
-                      <Input type="email" placeholder="john@example.com" />
+                      <Input 
+                        type="email" 
+                        placeholder="john@example.com" 
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className={errors.email ? "border-destructive" : ""}
+                      />
+                      {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
                     </div>
                     <div>
                       <label className="text-sm font-medium text-foreground mb-1.5 block">
                         Phone Number
                       </label>
-                      <Input type="tel" placeholder="07XXXXXXXX" />
+                      <Input 
+                        type="tel" 
+                        placeholder="07XXXXXXXX" 
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      />
                     </div>
                     <div>
                       <label className="text-sm font-medium text-foreground mb-1.5 block">
                         Subject
                       </label>
-                      <Input placeholder="How can we help you?" />
+                      <Input 
+                        placeholder="How can we help you?" 
+                        value={formData.subject}
+                        onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                      />
                     </div>
                     <div>
                       <label className="text-sm font-medium text-foreground mb-1.5 block">
-                        Message
+                        Message <span className="text-destructive">*</span>
                       </label>
                       <Textarea 
                         placeholder="Tell us about your needs..."
                         rows={5}
+                        value={formData.message}
+                        onChange={(e) => setFormData({...formData, message: e.target.value})}
+                        className={errors.message ? "border-destructive" : ""}
                       />
+                      {errors.message && <p className="text-xs text-destructive mt-1">{errors.message}</p>}
                     </div>
-                    <Button className="w-full" size="lg">
+                    <Button type="submit" className="w-full" size="lg">
                       Send Message
                     </Button>
                   </form>

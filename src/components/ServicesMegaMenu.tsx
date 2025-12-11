@@ -140,7 +140,10 @@ const ServicesMegaMenu = () => {
   ];
 
   return (
-    <div className="absolute left-1/2 -translate-x-1/2 top-full w-[800px] max-w-[95vw] bg-card border border-border rounded-xl shadow-strong animate-fade-in z-50">
+    <div 
+      className="absolute left-1/2 -translate-x-1/2 top-full w-[800px] max-w-[95vw] bg-card border border-border rounded-xl shadow-strong animate-fade-in z-50"
+      onClick={(e) => e.stopPropagation()}
+    >
       <div className="p-5">
         {/* Featured Quick Links */}
         <div className="flex items-center gap-2 mb-4 pb-4 border-b border-border">
